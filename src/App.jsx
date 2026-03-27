@@ -8,10 +8,24 @@ gsap.registerPlugin(ScrollTrigger);
 
 const translations = {
   pt: {
+    navServices: 'Serviços',
+    navQuote: 'Orçamento',
     heroLead: 'A maioria da indústria foca apenas em lavar e entregar roupas...',
+    heroT1: 'Nós focamos em ',
+    heroTFreedom: 'liberdade',
+    heroTAnd: ' e ',
+    heroTTime: 'tempo',
+    heroTFor: ' para ',
     heroYou: 'si',
+    heroDesc: 'Da lavanderia tradicional e limpeza de tapetes à impermeabilização e tinturaria de alto nível. Um atendimento impecável para a sua empresa ou ',
     heroAcc: 'alojamento local',
+    heroBtn: 'Fazer Orçamento',
     servicesTitle: 'Tudo o que precisas, num só lugar.',
+    sSeco: 'Limpeza a Seco',
+    sTapetes: 'Limpeza Tapetes',
+    sCortinas: 'Limpeza Cortinados',
+    sImper: 'Impermeabilização',
+    sTinta: 'Tinturaria',
     sEdredoes: 'Edredões',
     sPacks: 'Packs',
     sCostura: 'Arranjos Costura',
@@ -20,16 +34,55 @@ const translations = {
     b2bDesc: 'Restaurantes, alojamentos locais, clínicas, ginásios e salões. Recolha, lavagem premium e entrega com planos recorrentes.',
     b2bBtn: 'Fale Connosco',
     ctaDesc: 'Nós não limpamos apenas as suas peças. Nós restauramos o seu valor através de procedimentos premium B2B, B2C e self-service de vanguarda 7h-23h.',
+    ctaBtn: 'Orçamento via Whatsapp',
+    ctaHeadline1: 'De Portugal para o Mundo',
+    ctaHeadline2: 'a precisão encontra a comodidade.',
     footerDesc: 'Sua lavanderia de Portugal para o mundo, focada em conforto, restauro têxtil avançado e extrema comodidade empresarial e residencial.',
+    sysOp: 'Sistema Operacional 24/7',
     fRoutes: 'Rotas',
     fAgenda: 'Agendamento',
     fContact: 'Contactos',
+    fLocation: 'Portugal',
+    mTitle1: 'O que precisa lavar?',
+    mSub1: 'Selecione o serviço ideal para um orçamento focado.',
+    mBtn1: 'Continuar pedindo',
+    mTitle2: 'Detalhes do Pedido',
+    mSub2: 'Ajuda-nos a avaliar especificidades para um orçamento 100% preciso.',
+    mUpload: 'Opcional: Faça o upload da foto do tapete',
+    mLength: 'Comprimento (m)',
+    mWidth: 'Largura (m)',
+    mCep: 'Código Postal / CEP',
+    mDetails: 'Detalhes da Peça (Qtd, Tecido)',
+    mDetailsPlaceholder: 'Descreva brevemente o que precisa...',
+    mBack: 'Voltar',
+    mNext: 'Continuar',
+    mTitle3: 'Quase finalizado',
+    mSub3: 'Precisamos dos seus dados para enviar o orçamento personalizado de forma profissional.',
+    mName: 'Nome',
+    mLast: 'Sobrenome',
+    mEmail: 'E-mail',
+    mWpp: 'WhatsApp com DDD/Cód. País',
+    mSubmit: 'Solicitar Orçamento'
   },
   br: {
+    navServices: 'Serviços',
+    navQuote: 'Orçamento',
     heroLead: 'A maioria da indústria foca apenas em lavar e entregar roupas...',
+    heroT1: 'Nós focamos em ',
+    heroTFreedom: 'liberdade',
+    heroTAnd: ' e ',
+    heroTTime: 'tempo',
+    heroTFor: ' para ',
     heroYou: 'você',
+    heroDesc: 'Da lavanderia tradicional e limpeza de tapetes à impermeabilização e tinturaria de alto nível. Um atendimento impecável para a sua empresa ou ',
     heroAcc: 'hospedagem local',
+    heroBtn: 'Fazer Orçamento',
     servicesTitle: 'Tudo o que você precisa, num só lugar.',
+    sSeco: 'Limpeza a Seco',
+    sTapetes: 'Limpeza Tapetes',
+    sCortinas: 'Limpeza Cortinados',
+    sImper: 'Impermeabilização',
+    sTinta: 'Tinturaria',
     sEdredoes: 'Edredons',
     sPacks: 'Pacotes',
     sCostura: 'Ajustes de Costura',
@@ -38,10 +91,92 @@ const translations = {
     b2bDesc: 'Restaurantes, hospedagens locais, clínicas, academias e salões. Coleta, lavagem premium e entrega com planos recorrentes.',
     b2bBtn: 'Fale Conosco',
     ctaDesc: 'Nós não limpamos apenas as suas peças. Nós restauramos o seu valor através de procedimentos premium B2B, B2C e self-service de vanguarda 7h-23h.',
+    ctaBtn: 'Orçamento via Whatsapp',
+    ctaHeadline1: 'Do Brasil para o Mundo',
+    ctaHeadline2: 'a precisão encontra a comodidade.',
     footerDesc: 'Sua lavanderia para o mundo, focada em conforto, restauro têxtil avançado e extrema comodidade empresarial e residencial.',
+    sysOp: 'Sistema Operacional 24/7',
     fRoutes: 'Rotas',
     fAgenda: 'Agendamento',
     fContact: 'Contatos',
+    fLocation: 'Portugal & Brasil',
+    mTitle1: 'O que precisa lavar?',
+    mSub1: 'Selecione o serviço ideal para um orçamento rápido.',
+    mBtn1: 'Continuar pedindo',
+    mTitle2: 'Detalhes do Pedido',
+    mSub2: 'Ajuda a gente a entender melhor seu pedido para um orçamento preciso.',
+    mUpload: 'Opcional: Envie uma foto do tapete',
+    mLength: 'Comprimento (m)',
+    mWidth: 'Largura (m)',
+    mCep: 'CEP',
+    mDetails: 'Detalhes da Peça (Qtd, Tecido)',
+    mDetailsPlaceholder: 'Descreva brevemente o que precisa...',
+    mBack: 'Voltar',
+    mNext: 'Continuar',
+    mTitle3: 'Quase lá',
+    mSub3: 'Precisamos dos seus dados para enviar o seu orçamento personalizado.',
+    mName: 'Nome',
+    mLast: 'Sobrenome',
+    mEmail: 'E-mail',
+    mWpp: 'WhatsApp com DDD',
+    mSubmit: 'Solicitar Orçamento'
+  },
+  en: {
+    navServices: 'Services',
+    navQuote: 'Get a Quote',
+    heroLead: 'Most of the industry focuses only on washing and delivering clothes...',
+    heroT1: 'We focus on ',
+    heroTFreedom: 'freedom',
+    heroTAnd: ' and ',
+    heroTTime: 'time',
+    heroTFor: ' for ',
+    heroYou: 'you',
+    heroDesc: 'From traditional laundry and carpet cleaning to top-tier waterproofing and dyeing. Impeccable service for your business or ',
+    heroAcc: 'vacation rental',
+    heroBtn: 'Get a Quote',
+    servicesTitle: 'Everything you need, in one place.',
+    sSeco: 'Dry Cleaning',
+    sTapetes: 'Carpet Cleaning',
+    sCortinas: 'Curtain Cleaning',
+    sImper: 'Waterproofing',
+    sTinta: 'Dyeing',
+    sEdredoes: 'Comforters',
+    sPacks: 'Packages',
+    sCostura: 'Tailoring & Repairs',
+    sMedida: 'Custom Clothing',
+    b2bTitle: 'Tailored Solutions for Businesses',
+    b2bDesc: 'Restaurants, vacation rentals, clinics, gyms, and salons. Premium collection, washing, and delivery with recurring plans.',
+    b2bBtn: 'Contact Us',
+    ctaDesc: 'We don\'t just clean your garments. We restore their value through premium B2B, B2C vanguard procedures and 7am-11pm self-service.',
+    ctaBtn: 'Quote via WhatsApp',
+    ctaHeadline1: 'From Portugal to the World',
+    ctaHeadline2: 'precision meets convenience.',
+    footerDesc: 'Your laundry service from Portugal to the world, focused on comfort, advanced textile restoration, and extreme convenience for businesses & homes.',
+    sysOp: 'Operating System 24/7',
+    fRoutes: 'Routes',
+    fAgenda: 'Scheduling',
+    fContact: 'Contact Us',
+    fLocation: 'Worldwide',
+    mTitle1: 'What do you need washed?',
+    mSub1: 'Select the ideal service for a tailored quote.',
+    mBtn1: 'Continue',
+    mTitle2: 'Order Details',
+    mSub2: 'Help us assess specifics for a 100% accurate quote.',
+    mUpload: 'Optional: Upload a photo of the carpet',
+    mLength: 'Length (m)',
+    mWidth: 'Width (m)',
+    mCep: 'Zip / Postal Code',
+    mDetails: 'Item Details (Qty, Fabric)',
+    mDetailsPlaceholder: 'Briefly describe what you need...',
+    mBack: 'Back',
+    mNext: 'Continue',
+    mTitle3: 'Almost done',
+    mSub3: 'We need your details to send the customized professional quote.',
+    mName: 'First Name',
+    mLast: 'Last Name',
+    mEmail: 'Email',
+    mWpp: 'WhatsApp with Country Code',
+    mSubmit: 'Request Quote'
   }
 };
 
@@ -104,7 +239,7 @@ export default function App() {
         </div>
         
         <div className="hidden md:flex items-center gap-8">
-          <a href="#features" className="font-mono text-sm uppercase tracking-widest text-dark hover:text-primary transition-colors font-bold">Serviços</a>
+          <a href="#features" className="font-mono text-sm uppercase tracking-widest text-dark hover:text-primary transition-colors font-bold">{t.navServices}</a>
           
           <div className="flex items-center gap-3 border-l border-dark/10 pl-8">
             <button onClick={() => setLang('pt')} className={`w-7 h-7 rounded-full overflow-hidden border-2 transition-all shadow-sm ${lang === 'pt' ? 'border-primary opacity-100 scale-110' : 'border-transparent opacity-50 hover:opacity-100'}`} title="Português (PT)">
@@ -113,6 +248,9 @@ export default function App() {
             <button onClick={() => setLang('br')} className={`w-7 h-7 rounded-full overflow-hidden border-2 transition-all shadow-sm ${lang === 'br' ? 'border-primary opacity-100 scale-110' : 'border-transparent opacity-50 hover:opacity-100'}`} title="Português (BR)">
               <img src="https://flagcdn.com/w80/br.png" alt="BR" className="w-full h-full object-cover" />
             </button>
+            <button onClick={() => setLang('en')} className={`w-7 h-7 rounded-full overflow-hidden border-2 transition-all shadow-sm ${lang === 'en' ? 'border-primary opacity-100 scale-110' : 'border-transparent opacity-50 hover:opacity-100'}`} title="English (US)">
+              <img src="https://flagcdn.com/w80/us.png" alt="US" className="w-full h-full object-cover" />
+            </button>
           </div>
         </div>
 
@@ -120,7 +258,7 @@ export default function App() {
           onClick={() => setModalOpen(true)}
           className="hidden sm:flex magnetic-btn bg-primary text-white font-medium px-5 py-2.5 rounded-full text-sm shadow-[0_0_20px_rgba(37,170,225,0.25)] hover:shadow-[0_0_30px_rgba(37,170,225,0.45)]"
         >
-          Orçamento
+          {t.navQuote}
         </button>
       </nav>
 
@@ -137,16 +275,16 @@ export default function App() {
         <div className="relative z-10 max-w-4xl w-full text-center py-24">
           <p className="philo-line font-mono text-sm tracking-widest text-primary font-bold mb-8 uppercase">{t.heroLead}</p>
           <h2 className="philo-line font-heading font-light italic text-4xl md:text-6xl lg:text-7xl text-dark mb-6 leading-tight">
-            Nós focamos em <span className="text-primary font-bold not-italic font-heading">liberdade</span> e <span className="text-primary font-bold not-italic font-heading">tempo</span> para {t.heroYou}.
+            {t.heroT1}<span className="text-primary font-bold not-italic font-heading">{t.heroTFreedom}</span>{t.heroTAnd}<span className="text-primary font-bold not-italic font-heading">{t.heroTTime}</span>{t.heroTFor}{t.heroYou}.
           </h2>
           <p className="philo-line font-body text-xl text-textSecondary max-w-2xl mx-auto mb-10">
-            Da lavanderia tradicional e limpeza de tapetes à impermeabilização e tinturaria de alto nível. Um atendimento impecável para a sua empresa ou {t.heroAcc}.
+            {t.heroDesc}{t.heroAcc}.
           </p>
           <button
             onClick={() => setModalOpen(true)}
             className="philo-line magnetic-btn bg-primary text-white font-medium px-8 py-4 rounded-full text-lg w-auto inline-flex items-center gap-3 font-heading shadow-[0_4px_20px_rgba(37,170,225,0.35)] hover:shadow-[0_4px_30px_rgba(37,170,225,0.5)]"
           >
-            Fazer Orçamento <ArrowRight className="w-5 h-5" />
+            {t.heroBtn} <ArrowRight className="w-5 h-5" />
           </button>
         </div>
       </section>
@@ -154,17 +292,17 @@ export default function App() {
       {/* SEÇÃO 2 - SERVIÇOS — Grid com 9 fotos originais Washlab */}
       <section id="features" className="py-24 md:py-32 px-6 md:px-12 max-w-7xl mx-auto">
         <div className="mb-16 text-center md:text-left">
-          <h2 className="font-mono text-primary text-sm uppercase tracking-[0.2em] mb-4 font-bold">Serviços</h2>
+          <h2 className="font-mono text-primary text-sm uppercase tracking-[0.2em] mb-4 font-bold">{t.navServices}</h2>
           <h3 className="font-heading text-4xl md:text-5xl text-dark font-bold">{t.servicesTitle}</h3>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-10 max-w-5xl mx-auto">
           {[
-            { name: 'Limpeza a Seco', image: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=503,h=360,fit=crop/YZ9Vj5wQjGFEQQ7J/shop-1746862-YKb6l9oDZZhkaBZq.jpg' },
-            { name: 'Limpeza Tapetes', image: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=503,h=360,fit=crop/YZ9Vj5wQjGFEQQ7J/generated/generated-mjEvGEGLEBFLDpMR.png' },
-            { name: 'Limpeza Cortinados', image: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=503,h=360,fit=crop/YZ9Vj5wQjGFEQQ7J/generated/generated-AVLpaLQD7vsx8l6k.png' },
-            { name: 'Impermeabilização', image: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=503,h=360,fit=crop/YZ9Vj5wQjGFEQQ7J/generated/generated-dJo6bowZXDtpVX64.png' },
-            { name: 'Tinturaria', image: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=503,h=360,fit=crop/YZ9Vj5wQjGFEQQ7J/generated/generated-YanyJngRg1SZkMw8.png' },
+            { name: t.sSeco, image: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=503,h=360,fit=crop/YZ9Vj5wQjGFEQQ7J/shop-1746862-YKb6l9oDZZhkaBZq.jpg' },
+            { name: t.sTapetes, image: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=503,h=360,fit=crop/YZ9Vj5wQjGFEQQ7J/generated/generated-mjEvGEGLEBFLDpMR.png' },
+            { name: t.sCortinas, image: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=503,h=360,fit=crop/YZ9Vj5wQjGFEQQ7J/generated/generated-AVLpaLQD7vsx8l6k.png' },
+            { name: t.sImper, image: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=503,h=360,fit=crop/YZ9Vj5wQjGFEQQ7J/generated/generated-dJo6bowZXDtpVX64.png' },
+            { name: t.sTinta, image: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=503,h=360,fit=crop/YZ9Vj5wQjGFEQQ7J/generated/generated-YanyJngRg1SZkMw8.png' },
             { name: t.sEdredoes, image: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=503,h=360,fit=crop/YZ9Vj5wQjGFEQQ7J/generated/generated-Yg2Wy26Mx5uVWnM4.png' },
             { name: t.sPacks, image: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=503,h=360,fit=crop/YZ9Vj5wQjGFEQQ7J/generated/generated-AE0or0gQ4eHpbexP.png' },
             { name: t.sCostura, image: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=503,h=360,fit=crop/YZ9Vj5wQjGFEQQ7J/generated/generated-Y4LVvLa4yPfyR22Z.png' },
@@ -220,10 +358,10 @@ export default function App() {
         <div className="relative z-10 p-8 md:p-16 lg:p-24 max-w-7xl w-full mx-auto">
           <h1 className="flex flex-col gap-2 mb-6">
             <span className="hero-text-split font-heading font-bold text-3xl md:text-5xl lg:text-7xl uppercase tracking-tighter text-dark">
-              De Portugal para o Mundo
+              {t.ctaHeadline1}
             </span>
             <span className="hero-text-split font-heading font-light italic text-4xl md:text-6xl lg:text-7xl text-primary mt-[-10px]">
-              a precisão encontra a comodidade.
+              {t.ctaHeadline2}
             </span>
           </h1>
           <div className="hero-text-split max-w-xl mb-10 text-textSecondary font-body text-lg md:text-xl leading-relaxed">
@@ -233,7 +371,7 @@ export default function App() {
             onClick={() => setModalOpen(true)}
             className="hero-text-split magnetic-btn bg-dark text-white font-medium px-8 py-4 rounded-full text-lg w-auto inline-flex items-center gap-3 font-heading shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:shadow-[0_4px_30px_rgba(0,0,0,0.4)]"
           >
-            Orçamento via Whatsapp <ArrowRight className="w-5 h-5 text-primary" />
+            {t.ctaBtn} <ArrowRight className="w-5 h-5 text-primary" />
           </button>
         </div>
       </section>
@@ -248,7 +386,7 @@ export default function App() {
             </p>
             <div className="flex items-center gap-3 bg-white/5 border border-white/10 px-4 py-2 rounded-full w-max">
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-              <span className="font-mono tracking-widest text-xs uppercase text-white/80 font-bold">Sistema Operacional 24/7</span>
+              <span className="font-mono tracking-widest text-xs uppercase text-white/80 font-bold">{t.sysOp}</span>
             </div>
           </div>
 
@@ -263,7 +401,7 @@ export default function App() {
           <div>
             <h4 className="font-mono text-xs tracking-widest text-primary mb-6 uppercase font-bold">{t.fContact}</h4>
             <ul className="space-y-4 font-body text-white/70">
-              <li className="flex items-center gap-2"><Navigation className="w-4 h-4 text-primary" /> Portugal & Brasil</li>
+              <li className="flex items-center gap-2"><Navigation className="w-4 h-4 text-primary" /> {t.fLocation}</li>
               <li><a href="mailto:info@washlab.pt" className="hover:text-primary transition-colors">info@washlab.pt</a></li>
               <li><a href="tel:+351925680791" className="hover:text-primary transition-colors">+351 925 680 791</a></li>
               <li className="mt-6 flex"><a href="https://instagram.com/washlabpt" target="_blank" rel="noreferrer" className="p-3 bg-primary/10 border border-primary/20 rounded-full hover:bg-primary transition-colors group">

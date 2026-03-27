@@ -2,16 +2,15 @@ import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { X, ChevronRight, ChevronLeft, Upload, CheckCircle2 } from 'lucide-react';
 
-const SERVICES = [
-  'Limpeza a Seco',
-  'Limpeza Tapetes',
-  'Limpeza Cortinados',
-  'Impermeabilização',
-  'Tinturaria',
-  'Edredões'
-];
-
-export default function ModalOrcamento({ isOpen, onClose }) {
+export default function ModalOrcamento({ isOpen, onClose, t }) {
+  const SERVICES = [
+    t.sSeco || 'Limpeza a Seco',
+    t.sTapetes || 'Limpeza Tapetes',
+    t.sCortinas || 'Limpeza Cortinados',
+    t.sImper || 'Impermeabilização',
+    t.sTinta || 'Tinturaria',
+    t.sEdredoes || 'Edredões'
+  ];
   const modalRef = useRef(null);
   const contentRef = useRef(null);
   const [step, setStep] = useState(1);
@@ -63,7 +62,7 @@ export default function ModalOrcamento({ isOpen, onClose }) {
   const generateWhatsAppLink = () => {
     let message = `*Novo Pedido de Orçamento | Edson Lavanderia*%0A%0A`;
     message += `*Serviço:* ${formData.service}%0A`;
-    if (['Limpeza Tapetes', 'Edredões'].includes(formData.service)) {
+    if ([t.sTapetes, t.sEdredoes].includes(formData.service)) {
       message += `*Medidas:* ${formData.length}x${formData.width}m%0A`;
       message += `*CEP:* ${formData.cep}%0A`;
     } else {
@@ -106,8 +105,8 @@ export default function ModalOrcamento({ isOpen, onClose }) {
         {/* Step 1: Service Selection */}
         {step === 1 && (
           <div className="animate-[fadeIn_0.4s_ease-out]">
-            <h2 className="text-3xl font-heading font-bold tracking-tight mb-2 text-dark">O que precisa lavar?</h2>
-            <p className="text-textSecondary mb-8 font-body">Selecione o serviço ideal para um orçamento focado.</p>
+            <h2 className="text-3xl font-heading font-bold tracking-tight mb-2 text-dark">{t.mTitle1}</h2>
+            <p className="text-textSecondary mb-8 font-body">{t.mSub1}</p>
 
             <div className="grid grid-cols-2 gap-3 mb-8">
               {SERVICES.map(srv => {
@@ -133,7 +132,7 @@ export default function ModalOrcamento({ isOpen, onClose }) {
                 disabled={!formData.service}
                 className="magnetic-btn px-6 py-3 rounded-full bg-dark text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
               >
-                Continuar pedindo <ChevronRight className="w-4 h-4" />
+                {t.mBtn1} <ChevronRight className="w-4 h-4" />
               </button>
             </div>
           </div>
@@ -142,43 +141,43 @@ export default function ModalOrcamento({ isOpen, onClose }) {
         {/* Step 2: Details */}
         {step === 2 && (
           <div className="animate-[fadeIn_0.4s_ease-out]">
-            <h2 className="text-3xl font-heading font-medium tracking-tight mb-2 text-dark">Detalhes do Pedido</h2>
-            <p className="text-textSecondary mb-8 font-body">Ajuda-nos a avaliar especificidades para um orçamento 100% preciso.</p>
+            <h2 className="text-3xl font-heading font-medium tracking-tight mb-2 text-dark">{t.mTitle2}</h2>
+            <p className="text-textSecondary mb-8 font-body">{t.mSub2}</p>
 
             <div className="space-y-4 mb-8">
-              {formData.service === 'Limpeza Tapetes' && (
+              {formData.service === t.sTapetes && (
                 <div className="p-4 border border-dashed border-border rounded-2xl hover:border-primary/50 transition-colors cursor-pointer group flex items-center justify-center flex-col gap-2 h-32 bg-backgroundAlt">
                   <Upload className="w-6 h-6 text-textSecondary group-hover:text-primary transition-colors" />
-                  <span className="text-sm font-heading text-textSecondary font-medium">Opcional: Faça o upload da foto do tapete</span>
+                  <span className="text-sm font-heading text-textSecondary font-medium">{t.mUpload}</span>
                   <input type="file" className="hidden" onChange={(e) => handleChange('photo', e.target.files[0])} />
                 </div>
               )}
 
-              {['Limpeza Tapetes', 'Edredões'].includes(formData.service) ? (
+              {[t.sTapetes, t.sEdredoes].includes(formData.service) ? (
                 <>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs uppercase tracking-wider text-textSecondary font-bold mb-2 font-mono">Comprimento (m)</label>
+                      <label className="block text-xs uppercase tracking-wider text-textSecondary font-bold mb-2 font-mono">{t.mLength}</label>
                       <input type="text" placeholder="Ex: 2.5" className="w-full bg-background border border-border rounded-xl px-4 py-3 text-dark outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" value={formData.length} onChange={(e) => handleChange('length', e.target.value)} />
                     </div>
                     <div>
-                      <label className="block text-xs uppercase tracking-wider text-textSecondary font-bold mb-2 font-mono">Largura (m)</label>
+                      <label className="block text-xs uppercase tracking-wider text-textSecondary font-bold mb-2 font-mono">{t.mWidth}</label>
                       <input type="text" placeholder="Ex: 1.8" className="w-full bg-background border border-border rounded-xl px-4 py-3 text-dark outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" value={formData.width} onChange={(e) => handleChange('width', e.target.value)} />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-textSecondary font-bold mb-2 font-mono">Código Postal / CEP</label>
+                    <label className="block text-xs uppercase tracking-wider text-textSecondary font-bold mb-2 font-mono">{t.mCep}</label>
                     <input type="text" placeholder="Ex: 1000-001" className="w-full bg-background border border-border rounded-xl px-4 py-3 text-dark outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" value={formData.cep} onChange={(e) => handleChange('cep', e.target.value)} />
                   </div>
                 </>
               ) : (
                 <>
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-textSecondary font-bold mb-2 font-mono">Detalhes da Peça (Qtd, Tecido)</label>
-                    <textarea rows="3" placeholder="Descreva brevemente o que precisa..." className="w-full bg-background border border-border rounded-xl px-4 py-3 text-dark outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" value={formData.details} onChange={(e) => handleChange('details', e.target.value)} />
+                    <label className="block text-xs uppercase tracking-wider text-textSecondary font-bold mb-2 font-mono">{t.mDetails}</label>
+                    <textarea rows="3" placeholder={t.mDetailsPlaceholder} className="w-full bg-background border border-border rounded-xl px-4 py-3 text-dark outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" value={formData.details} onChange={(e) => handleChange('details', e.target.value)} />
                   </div>
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-textSecondary font-bold mb-2 font-mono">Código Postal / CEP</label>
+                    <label className="block text-xs uppercase tracking-wider text-textSecondary font-bold mb-2 font-mono">{t.mCep}</label>
                     <input type="text" placeholder="Ex: 1000-001" className="w-full bg-background border border-border rounded-xl px-4 py-3 text-dark outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" value={formData.cep} onChange={(e) => handleChange('cep', e.target.value)} />
                   </div>
                 </>
@@ -187,10 +186,10 @@ export default function ModalOrcamento({ isOpen, onClose }) {
 
             <div className="flex justify-between">
               <button onClick={prevStep} className="px-6 py-3 rounded-full text-textSecondary flex items-center gap-2 hover:text-dark transition-colors font-medium">
-                <ChevronLeft className="w-4 h-4" /> Voltar
+                <ChevronLeft className="w-4 h-4" /> {t.mBack}
               </button>
               <button onClick={nextStep} className="magnetic-btn px-6 py-3 rounded-full bg-dark text-white font-medium disabled:opacity-50 flex items-center gap-2">
-                Continuar <ChevronRight className="w-4 h-4" />
+                {t.mNext} <ChevronRight className="w-4 h-4" />
               </button>
             </div>
           </div>
@@ -199,33 +198,33 @@ export default function ModalOrcamento({ isOpen, onClose }) {
         {/* Step 3: Contact Info */}
         {step === 3 && (
           <div className="animate-[fadeIn_0.4s_ease-out]">
-            <h2 className="text-3xl font-heading font-medium tracking-tight mb-2 text-dark">Quase finalizado</h2>
-            <p className="text-textSecondary mb-8 font-body">Precisamos dos seus dados para enviar o orçamento personalizado de forma profissional.</p>
+            <h2 className="text-3xl font-heading font-medium tracking-tight mb-2 text-dark">{t.mTitle3}</h2>
+            <p className="text-textSecondary mb-8 font-body">{t.mSub3}</p>
 
             <div className="space-y-4 mb-8">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-textSecondary font-bold mb-2 font-mono">Nome</label>
+                  <label className="block text-xs uppercase tracking-wider text-textSecondary font-bold mb-2 font-mono">{t.mName}</label>
                   <input type="text" className="w-full bg-background border border-border rounded-xl px-4 py-3 text-dark outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" value={formData.firstName} onChange={(e) => handleChange('firstName', e.target.value)} />
                 </div>
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-textSecondary font-bold mb-2 font-mono">Sobrenome</label>
+                  <label className="block text-xs uppercase tracking-wider text-textSecondary font-bold mb-2 font-mono">{t.mLast}</label>
                   <input type="text" className="w-full bg-background border border-border rounded-xl px-4 py-3 text-dark outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" value={formData.lastName} onChange={(e) => handleChange('lastName', e.target.value)} />
                 </div>
               </div>
               <div>
-                <label className="block text-xs uppercase tracking-wider text-textSecondary font-bold mb-2 font-mono">E-mail</label>
+                <label className="block text-xs uppercase tracking-wider text-textSecondary font-bold mb-2 font-mono">{t.mEmail}</label>
                 <input type="email" placeholder="seu@email.com" className="w-full bg-background border border-border rounded-xl px-4 py-3 text-dark outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" value={formData.email} onChange={(e) => handleChange('email', e.target.value)} />
               </div>
               <div>
-                <label className="block text-xs uppercase tracking-wider text-textSecondary font-bold mb-2 font-mono">WhatsApp com DDD/Cód. País</label>
+                <label className="block text-xs uppercase tracking-wider text-textSecondary font-bold mb-2 font-mono">{t.mWpp}</label>
                 <input type="text" placeholder="+351 900 000 000" className="w-full bg-background border border-border rounded-xl px-4 py-3 text-dark outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" value={formData.whatsapp} onChange={(e) => handleChange('whatsapp', e.target.value)} />
               </div>
             </div>
 
             <div className="flex justify-between">
               <button onClick={prevStep} className="px-6 py-3 rounded-full text-textSecondary flex items-center gap-2 hover:text-dark transition-colors font-medium">
-                <ChevronLeft className="w-4 h-4" /> Voltar
+                <ChevronLeft className="w-4 h-4" /> {t.mBack}
               </button>
               <a
                 href={generateWhatsAppLink()}
@@ -233,7 +232,7 @@ export default function ModalOrcamento({ isOpen, onClose }) {
                 onClick={onClose}
                 className="magnetic-btn px-6 py-3 rounded-full bg-primary text-white font-medium shadow-[0_4px_20px_rgba(37,170,225,0.4)] flex items-center gap-2"
               >
-                Solicitar Orçamento <ChevronRight className="w-4 h-4" />
+                {t.mSubmit} <ChevronRight className="w-4 h-4" />
               </a>
             </div>
           </div>
