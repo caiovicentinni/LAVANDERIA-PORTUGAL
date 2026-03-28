@@ -27,6 +27,8 @@ export default function ModalOrcamento({ isOpen, onClose, t }) {
     whatsapp: ''
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   useEffect(() => {
     let ctx = gsap.context(() => {
       if (isOpen) {
@@ -40,8 +42,10 @@ export default function ModalOrcamento({ isOpen, onClose, t }) {
         gsap.to(modalRef.current, {
           opacity: 0, duration: 0.3, delay: 0.1, onComplete: () => {
             gsap.set(modalRef.current, { visibility: 'hidden' });
-            // reset form after transition
-            setTimeout(() => setStep(1), 300);
+            setTimeout(() => {
+              setStep(1);
+              setIsSubmitting(false);
+            }, 300);
           }
         });
       }
@@ -74,7 +78,54 @@ export default function ModalOrcamento({ isOpen, onClose, t }) {
     message += `Email: ${formData.email}%0A`;
     message += `WhatsApp: ${formData.whatsapp}`;
 
-    return `https://wa.me/351925680791?text=${message}`;
+    return `https://wa.me/5521999994940?text=${message}`;
+  };
+
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+    
+    // Create FormData object matching Django parameters
+    const formDataObj = new FormData();
+    formDataObj.append('service', formData.service);
+    formDataObj.append('length', formData.length);
+    formDataObj.append('width', formData.width);
+    formDataObj.append('cep', formData.cep);
+    formDataObj.append('details', formData.details);
+    formDataObj.append('first_name', formData.firstName);
+    formDataObj.append('last_name', formData.lastName);
+    formDataObj.append('email', formData.email);
+    formDataObj.append('whatsapp', formData.whatsapp);
+    
+    if (formData.photo) {
+      formDataObj.append('photo', formData.photo);
+    }
+
+    // Determine the API URL depending on deployment context
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+
+    try {
+      const res = await fetch(`${API_URL}/quotes/`, {
+        method: 'POST',
+        body: formDataObj,
+      });
+
+      if (!res.ok) throw new Error('API Error');
+
+      const data = await res.json();
+      
+      // Send them to the dynamic API WhatsApp link, or the fallback one
+      const finalUrl = data.whatsapp_url || generateWhatsAppLink();
+      window.open(finalUrl, '_blank');
+      
+      onClose();
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      // Fallback: If backend is unreachable, still open WhatsApp
+      window.open(generateWhatsAppLink(), '_blank');
+      onClose();
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -147,7 +198,9 @@ export default function ModalOrcamento({ isOpen, onClose, t }) {
             <div className="space-y-4 mb-8">
               <div onClick={() => document.getElementById('photo-upload').click()} className="p-4 border border-dashed border-border rounded-2xl hover:border-primary/50 transition-colors cursor-pointer group flex items-center justify-center flex-col gap-2 h-32 bg-backgroundAlt">
                 <Upload className="w-6 h-6 text-textSecondary group-hover:text-primary transition-colors" />
-                <span className="text-sm font-heading text-textSecondary font-medium text-center px-4">{t.mUpload(formData.service)}</span>
+                <span className="text-sm font-heading text-textSecondary font-medium text-center px-4">
+                  {formData.photo ? formData.photo.name : t.mUpload(formData.service)}
+                </span>
                 <input id="photo-upload" type="file" className="hidden" onChange={(e) => handleChange('photo', e.target.files[0])} />
               </div>
 
@@ -216,22 +269,21 @@ export default function ModalOrcamento({ isOpen, onClose, t }) {
               </div>
               <div>
                 <label className="block text-xs uppercase tracking-wider text-textSecondary font-bold mb-2 font-mono">{t.mWpp}</label>
-                <input type="text" placeholder="+351 900 000 000" className="w-full bg-background border border-border rounded-xl px-4 py-3 text-dark outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" value={formData.whatsapp} onChange={(e) => handleChange('whatsapp', e.target.value)} />
+                <input type="text" placeholder="+55 21 00000 0000" className="w-full bg-background border border-border rounded-xl px-4 py-3 text-dark outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" value={formData.whatsapp} onChange={(e) => handleChange('whatsapp', e.target.value)} />
               </div>
             </div>
 
             <div className="flex justify-between">
-              <button onClick={prevStep} className="px-6 py-3 rounded-full text-textSecondary flex items-center gap-2 hover:text-dark transition-colors font-medium">
+              <button onClick={prevStep} disabled={isSubmitting} className="px-6 py-3 rounded-full text-textSecondary flex items-center gap-2 hover:text-dark transition-colors font-medium disabled:opacity-50">
                 <ChevronLeft className="w-4 h-4" /> {t.mBack}
               </button>
-              <a
-                href={generateWhatsAppLink()}
-                target="_blank" rel="noreferrer"
-                onClick={onClose}
-                className="magnetic-btn px-6 py-3 rounded-full bg-primary text-white font-medium shadow-[0_4px_20px_rgba(37,170,225,0.4)] flex items-center gap-2"
+              <button
+                onClick={handleSubmit}
+                disabled={isSubmitting}
+                className="magnetic-btn px-6 py-3 rounded-full bg-primary text-white font-medium shadow-[0_4px_20px_rgba(37,170,225,0.4)] flex items-center gap-2 disabled:opacity-60"
               >
-                {t.mSubmit} <ChevronRight className="w-4 h-4" />
-              </a>
+                {isSubmitting ? 'Enviando...' : t.mSubmit} <ChevronRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
         )}
