@@ -29,7 +29,7 @@ class QuoteSerializer(serializers.ModelSerializer):
         else:
             service = Service.objects.filter(name_pt__iexact=value).first() or \
                       Service.objects.filter(name_en__iexact=value).first() or \
-                      Service.objects.filter(name_es__iexact=value).first()
+                      Service.objects.filter(name_br__iexact=value).first()
                       
         if not service:
             # Fallback for undefined names, get the first or create a dummy
