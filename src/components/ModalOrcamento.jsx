@@ -89,7 +89,7 @@ export default function ModalOrcamento({ isOpen, onClose, t }) {
     formDataObj.append('service', formData.service);
     formDataObj.append('length', formData.length);
     formDataObj.append('width', formData.width);
-    formDataObj.append('cep', formData.cep);
+    formDataObj.append('postal_code', formData.cep);
     formDataObj.append('details', formData.details);
     formDataObj.append('first_name', formData.firstName);
     formDataObj.append('last_name', formData.lastName);
