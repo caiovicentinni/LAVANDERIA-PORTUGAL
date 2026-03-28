@@ -48,7 +48,10 @@ const translations = {
     mBtn1: 'Continuar pedindo',
     mTitle2: 'Detalhes do Pedido',
     mSub2: 'Ajuda-nos a avaliar especificidades para um orçamento 100% preciso.',
-    mUpload: 'Opcional: Faça o upload da foto do tapete',
+    mUpload: (service) => {
+      const map = { 'Limpeza a Seco': 'da peça', 'Limpeza Tapetes': 'do tapete', 'Limpeza Cortinados': 'do cortinado', 'Impermeabilização': 'da peça', 'Tinturaria': 'da peça', 'Edredões': 'do edredão', 'Roupa por Medida': 'da peça', 'Arranjos Costura': 'da peça' };
+      return `Opcional: Faça o upload da foto ${map[service] || 'do item'}`;
+    },
     mLength: 'Comprimento (m)',
     mWidth: 'Largura (m)',
     mCep: 'Código Postal / CEP',
@@ -105,7 +108,10 @@ const translations = {
     mBtn1: 'Continuar pedindo',
     mTitle2: 'Detalhes do Pedido',
     mSub2: 'Ajuda a gente a entender melhor seu pedido para um orçamento preciso.',
-    mUpload: 'Opcional: Envie uma foto do tapete',
+    mUpload: (service) => {
+      const map = { 'Limpeza a Seco': 'da peça', 'Limpeza Tapetes': 'do tapete', 'Limpeza Cortinados': 'do cortinado', 'Impermeabilização': 'da peça', 'Tinturaria': 'da peça', 'Edredons': 'do edredom', 'Roupa Sob Medida': 'da peça', 'Ajustes de Costura': 'da peça' };
+      return `Opcional: Envie uma foto ${map[service] || 'do item'}`;
+    },
     mLength: 'Comprimento (m)',
     mWidth: 'Largura (m)',
     mCep: 'CEP',
@@ -162,7 +168,10 @@ const translations = {
     mBtn1: 'Continue',
     mTitle2: 'Order Details',
     mSub2: 'Help us assess specifics for a 100% accurate quote.',
-    mUpload: 'Optional: Upload a photo of the carpet',
+    mUpload: (service) => {
+      const map = { 'Dry Cleaning': 'garment', 'Carpet Cleaning': 'carpet', 'Curtain Cleaning': 'curtain', 'Waterproofing': 'item', 'Dyeing': 'item', 'Comforters': 'comforter', 'Limpeza a Seco': 'garment', 'Limpeza Tapetes': 'carpet', 'Limpeza Cortinados': 'curtain', 'Packages': 'items', 'Tailoring & Repairs': 'garment', 'Custom Clothing': 'garment' };
+      return `Optional: Upload a photo of the ${map[service] || 'item'}`;
+    },
     mLength: 'Length (m)',
     mWidth: 'Width (m)',
     mCep: 'Zip / Postal Code',

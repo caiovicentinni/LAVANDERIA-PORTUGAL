@@ -98,7 +98,8 @@ class QuoteViewSet(viewsets.ModelViewSet):
         # 3) Enviar e-mail ao cliente + admin
         email_sent = False
         try:
-            send_quote_email(quote, whatsapp_url)
+            # Passando 'request' também para gerar URLs absolutas para a foto
+            send_quote_email(quote, whatsapp_url, request)
             email_sent = True
         except Exception as e:
             logger.error(f'Falha no envio de e-mail para orçamento #{quote.pk}: {e}')

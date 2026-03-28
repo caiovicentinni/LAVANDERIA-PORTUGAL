@@ -163,59 +163,7 @@ export default function QuoteModal({ isOpen, onClose, t, lang, services }: Quote
                   })}
                 </div>
 
-                {/* Upload de Foto — aparece quando serviço é selecionado */}
-                {selectedService && (
-                  <div className="mb-6 animate-[fadeIn_0.3s_ease-out]">
-                    <label className="block text-xs uppercase tracking-wider text-textSecondary font-bold mb-3 font-mono">
-                      <Camera className="w-3.5 h-3.5 inline-block mr-1.5 -mt-0.5" />
-                      {ul.title}
-                    </label>
 
-                    {!photoPreview ? (
-                      <div
-                        onClick={() => fileInputRef.current?.click()}
-                        onDrop={handleDrop}
-                        onDragOver={handleDragOver}
-                        onDragLeave={handleDragLeave}
-                        className={`relative cursor-pointer border-2 border-dashed rounded-2xl p-6 text-center transition-all duration-300 ${
-                          isDragging
-                            ? 'border-primary bg-primary/5 scale-[1.02]'
-                            : 'border-border hover:border-primary/50 hover:bg-primary/5'
-                        }`}
-                      >
-                        <div className="flex flex-col items-center gap-2">
-                          <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-colors ${isDragging ? 'bg-primary/20' : 'bg-surface'}`}>
-                            <Upload className={`w-5 h-5 ${isDragging ? 'text-primary' : 'text-textSecondary'}`} />
-                          </div>
-                          <p className="text-sm font-medium text-dark">{ul.hint}</p>
-                          <p className="text-xs text-textSecondary">{ul.formats}</p>
-                        </div>
-                        <input
-                          ref={fileInputRef}
-                          type="file"
-                          accept="image/jpeg,image/png,image/webp"
-                          className="hidden"
-                          onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileSelect(f); }}
-                        />
-                      </div>
-                    ) : (
-                      <div className="relative rounded-2xl overflow-hidden border border-border shadow-sm group">
-                        <img src={photoPreview} alt="Preview" className="w-full h-40 object-cover" />
-                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
-                          <button
-                            onClick={removePhoto}
-                            className="opacity-0 group-hover:opacity-100 transition-opacity bg-red-500 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 shadow-lg"
-                          >
-                            <Trash2 className="w-4 h-4" /> {ul.remove}
-                          </button>
-                        </div>
-                        <div className="absolute top-3 right-3 bg-green-500 text-white p-1.5 rounded-full shadow-lg">
-                          <CheckCircle2 className="w-4 h-4" />
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
 
                 <div className="flex justify-end">
                   <button onClick={nextStep} disabled={!selectedService}
@@ -231,7 +179,57 @@ export default function QuoteModal({ isOpen, onClose, t, lang, services }: Quote
               <div className="animate-[fadeIn_0.4s_ease-out]">
                 <h2 className="text-3xl font-heading font-medium tracking-tight mb-2 text-dark">{t.mTitle2}</h2>
                 <p className="text-textSecondary mb-8 font-body">{t.mSub2}</p>
+                
                 <div className="space-y-4 mb-8">
+                  {/* Upload de Foto */}
+                  <div className="mb-2 animate-[fadeIn_0.3s_ease-out]">
+                    <div
+                      onClick={() => fileInputRef.current?.click()}
+                      onDrop={handleDrop}
+                      onDragOver={handleDragOver}
+                      onDragLeave={handleDragLeave}
+                      className={`relative cursor-pointer border-2 border-dashed rounded-2xl p-6 text-center transition-all duration-300 min-h-[8rem] flex flex-col items-center justify-center ${
+                        isDragging
+                          ? 'border-primary bg-primary/5 scale-[1.02]'
+                          : 'border-border hover:border-primary/50 bg-backgroundAlt hover:bg-primary/5'
+                      }`}
+                    >
+                      {!photoPreview ? (
+                        <div className="flex flex-col items-center gap-2">
+                          <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-colors ${isDragging ? 'bg-primary/20' : 'bg-surface'}`}>
+                            <Upload className={`w-5 h-5 ${isDragging ? 'text-primary' : 'text-textSecondary'}`} />
+                          </div>
+                          <span className="text-sm font-heading text-textSecondary font-medium text-center px-2">
+                            {selectedService ? t.mUpload(getServiceName(selectedService)) : ul.title}
+                          </span>
+                        </div>
+                      ) : (
+                        <div className="relative rounded-2xl overflow-hidden border border-border shadow-sm group w-full h-40">
+                          <img src={photoPreview} alt="Preview" className="w-full h-full object-cover" />
+                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+                            <button
+                              onClick={(e: React.MouseEvent) => { e.stopPropagation(); removePhoto(); }}
+                              className="opacity-0 group-hover:opacity-100 transition-opacity bg-red-500 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 shadow-lg"
+                            >
+                              <Trash2 className="w-4 h-4" /> {ul.remove}
+                            </button>
+                          </div>
+                          <div className="absolute top-3 right-3 bg-green-500 text-white p-1.5 rounded-full shadow-lg">
+                            <CheckCircle2 className="w-4 h-4" />
+                          </div>
+                        </div>
+                      )}
+                      
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/jpeg,image/png,image/webp"
+                        className="hidden"
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => { const f = e.target.files?.[0]; if (f) handleFileSelect(f); }}
+                      />
+                    </div>
+                  </div>
+
                   {selectedService?.requires_dimensions ? (
                     <>
                       <div className="grid grid-cols-2 gap-4">

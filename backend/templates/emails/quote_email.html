@@ -112,6 +112,13 @@
                           </span>
                         </td>
                       </tr>
+                      {% if photo_url %}
+                      <tr>
+                        <td style="padding-top: 15px; text-align: center;">
+                          <img src="{{ photo_url }}" alt="Foto da Peça" style="max-width: 100%; max-height: 280px; border-radius: 6px; border: 2px solid #E8C949; display: block; margin: 0 auto;" />
+                        </td>
+                      </tr>
+                      {% endif %}
                       {% endif %}
                     </table>
 

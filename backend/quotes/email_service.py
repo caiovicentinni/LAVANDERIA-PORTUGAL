@@ -14,11 +14,15 @@ SUBJECT_TRANSLATIONS = {
 ADMIN_SUBJECT = 'Novo Orçamento #{quote_id} — €{price} — {name}'
 
 
-def send_quote_email(quote, whatsapp_url=None):
+def send_quote_email(quote, whatsapp_url=None, request=None):
     """Envia e-mail com orçamento e preço final para o cliente + admin."""
     lang = quote.language or 'pt'
     service_name = quote.service.get_name(lang)
     price = f'{quote.estimated_price:.2f}'
+
+    photo_url = None
+    if quote.photo and request:
+        photo_url = request.build_absolute_uri(quote.photo.url)
 
     context = {
         'quote': quote,
@@ -26,6 +30,7 @@ def send_quote_email(quote, whatsapp_url=None):
         'estimated_price': price,
         'lang': lang,
         'whatsapp_url': whatsapp_url,
+        'photo_url': photo_url,
     }
 
     html_content = render_to_string('emails/quote_email.html', context)

@@ -145,13 +145,11 @@ export default function ModalOrcamento({ isOpen, onClose, t }) {
             <p className="text-textSecondary mb-8 font-body">{t.mSub2}</p>
 
             <div className="space-y-4 mb-8">
-              {formData.service === t.sTapetes && (
-                <div className="p-4 border border-dashed border-border rounded-2xl hover:border-primary/50 transition-colors cursor-pointer group flex items-center justify-center flex-col gap-2 h-32 bg-backgroundAlt">
-                  <Upload className="w-6 h-6 text-textSecondary group-hover:text-primary transition-colors" />
-                  <span className="text-sm font-heading text-textSecondary font-medium">{t.mUpload}</span>
-                  <input type="file" className="hidden" onChange={(e) => handleChange('photo', e.target.files[0])} />
-                </div>
-              )}
+              <div onClick={() => document.getElementById('photo-upload').click()} className="p-4 border border-dashed border-border rounded-2xl hover:border-primary/50 transition-colors cursor-pointer group flex items-center justify-center flex-col gap-2 h-32 bg-backgroundAlt">
+                <Upload className="w-6 h-6 text-textSecondary group-hover:text-primary transition-colors" />
+                <span className="text-sm font-heading text-textSecondary font-medium text-center px-4">{t.mUpload(formData.service)}</span>
+                <input id="photo-upload" type="file" className="hidden" onChange={(e) => handleChange('photo', e.target.files[0])} />
+              </div>
 
               {[t.sTapetes, t.sEdredoes].includes(formData.service) ? (
                 <>
