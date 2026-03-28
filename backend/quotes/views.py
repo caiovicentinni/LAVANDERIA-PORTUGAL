@@ -82,6 +82,11 @@ class QuoteViewSet(viewsets.ModelViewSet):
         return [IsAdminUser()]
 
     def create(self, request, *args, **kwargs):
+        from services.models import Service
+        if Service.objects.count() == 0:
+            from django.core.management import call_command
+            call_command('seed_services')
+            
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         quote = serializer.save()
